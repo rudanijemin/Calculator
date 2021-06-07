@@ -1,6 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart ';
+// google=dart math expression
+
 
 void main() {
   runApp(calculator());
@@ -24,6 +27,61 @@ class simplecalculator extends StatefulWidget {
 }
 
 class _simplecalculatorState extends State<simplecalculator> {
+  String equation="0";
+  String result="0";
+  String expression="";
+  double equationFontSize= 38.0;
+  double resultFontSize=48;
+  buttonpressed(String buttonText){
+    setState(() {
+      if(buttonText=="C"){
+
+        equation ="0";
+        result="0";
+        double equationFontSize= 38.0;
+        double resultFontSize=48;
+
+      }else if(buttonText=="<×"){
+        double equationFontSize= 48.0;
+        double resultFontSize=38;
+        equation=equation.substring(0,equation.length-1);
+        if(equation==""){
+          equation="0";
+        }
+
+      }else if(buttonText=="="){
+        double equationFontSize= 48.0;
+        double resultFontSize=38;
+
+        expression=equation;
+        expression=expression.replaceAll("×","*");
+        expression=expression.replaceAll("÷","/");
+
+        try{
+          Parser p = new Parser();
+          Expression exp=p.parse(expression);
+
+          ContextModel cm=ContextModel();
+          result='${exp.evaluate(EvaluationType.REAL,cm)}';
+        }catch(e){
+          result ="Error";
+
+        }
+
+      }else{
+        double equationFontSize= 38.0;
+        double resultFontSize=48;
+        if(equation=="0"){
+          equation=buttonText;
+        }else{
+          equation=equation+buttonText;
+        }
+
+      }
+    });
+  }
+
+
   Widget buildButton(
       String buttonText, double buttonHeight, Color buttonColor) {
     return Container(
@@ -36,7 +94,7 @@ class _simplecalculatorState extends State<simplecalculator> {
                 color: Colors.white, width: 1, style: BorderStyle.solid),
           ),
           padding: EdgeInsets.all(16.0),
-          onPressed: null,
+          onPressed: () =>buttonpressed(buttonText),
           child: Text(
             buttonText,
             style: TextStyle(
@@ -58,8 +116,8 @@ class _simplecalculatorState extends State<simplecalculator> {
             alignment: Alignment.centerRight,
             padding: EdgeInsets.fromLTRB(10, 20, 10, 0), //left,right.top.bottom
             child: Text(
-              "0",
-              style: TextStyle(fontSize: 38),
+              equation,
+              style: TextStyle(fontSize: equationFontSize),
             ),
           ),
 
@@ -67,8 +125,8 @@ class _simplecalculatorState extends State<simplecalculator> {
             alignment: Alignment.centerRight,
             padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
             child: Text(
-              "0",
-              style: TextStyle(fontSize: 48),
+              result,
+              style: TextStyle(fontSize: resultFontSize),
             ),
           ),
           //divied screen in a half =first half at top....and second half at bottom.
@@ -86,7 +144,7 @@ class _simplecalculatorState extends State<simplecalculator> {
                     TableRow(
                       children: [
                         buildButton("C", 1, Colors.redAccent),
-                        buildButton("×", 1, Colors.blue),
+                        buildButton("<×", 1, Colors.blue),
                         buildButton("÷", 1, Colors.blue),
                       ],   //symbol ke liye google---fileformat.info
                     ),
