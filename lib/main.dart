@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class calculator extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'calculator',
-      theme: ThemeData(primarySwatch: Colors.black),
+
       home: simplecalculator(),
     );
   }
@@ -37,7 +38,7 @@ class _simplecalculatorState extends State<simplecalculator> {
           padding: EdgeInsets.all(16.0),
           onPressed: null,
           child: Text(
-            buttonText,7
+            buttonText,
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.normal,
@@ -50,7 +51,7 @@ class _simplecalculatorState extends State<simplecalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(" calculator")),
+      appBar: AppBar(title: Text(" simple calculator")),
       body: Column(
         children: <Widget>[
           Container(
@@ -64,7 +65,7 @@ class _simplecalculatorState extends State<simplecalculator> {
 
           Container(
             alignment: Alignment.centerRight,
-            padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
             child: Text(
               "0",
               style: TextStyle(fontSize: 48),
@@ -83,8 +84,43 @@ class _simplecalculatorState extends State<simplecalculator> {
                 child: Table(
                   children: [
                     TableRow(
-                      children: [],
+                      children: [
+                        buildButton("C", 1, Colors.redAccent),
+                        buildButton("×", 1, Colors.blue),
+                        buildButton("÷", 1, Colors.redAccent),
+                      ],   //symbol ke liye google---fileformat.info
                     ),
+                    TableRow(
+                      children: [
+                        buildButton("7", 1, Colors.black54),
+                        buildButton("8", 1, Colors.black54),
+                        buildButton("9", 1, Colors.black54),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        buildButton("4", 1, Colors.black54),
+                        buildButton("5", 1, Colors.black54),
+                        buildButton("6", 1, Colors.black54),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        buildButton("1", 1, Colors.black54),
+                        buildButton("2", 1, Colors.black54),
+                        buildButton("3", 1, Colors.black54),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        buildButton(".", 1, Colors.black54),
+                        buildButton("0", 1, Colors.black54),
+                        buildButton("00", 1, Colors.black54),
+                      ],
+                    ),
+
+
+
                   ],
                 ),
               ),
