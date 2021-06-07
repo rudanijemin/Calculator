@@ -87,7 +87,7 @@ class _simplecalculatorState extends State<simplecalculator> {
                       children: [
                         buildButton("C", 1, Colors.redAccent),
                         buildButton("×", 1, Colors.blue),
-                        buildButton("÷", 1, Colors.redAccent),
+                        buildButton("÷", 1, Colors.blue),
                       ],   //symbol ke liye google---fileformat.info
                     ),
                     TableRow(
@@ -118,11 +118,38 @@ class _simplecalculatorState extends State<simplecalculator> {
                         buildButton("00", 1, Colors.black54),
                       ],
                     ),
-
-
-
                   ],
                 ),
+              ),
+              Container(
+              width: MediaQuery.of(context).size.width*0.25,
+              child: Table(
+                children: [
+                  TableRow(
+                    children: [
+                      buildButton("×", 1, Colors.blue),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      buildButton("-", 1, Colors.blue),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      buildButton("+", 1, Colors.blue),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      buildButton("=", 2, Colors.redAccent),
+                    ],
+                  ),
+
+                ],
+
+              ),
+
               ),
             ],
           ),
